@@ -1,4 +1,4 @@
-import handleSubmit from "../../assets/js/handleSubmit";
+import { useState } from "react";
 
 import "./form.css";
 
@@ -12,11 +12,22 @@ const Form = ({
 	passwordConfirm,
 	setPasswordConfirm,
 }) => {
+	const [isPasswordDiff, setIsPasswordDiff] = useState(false);
+
 	return (
 		<>
 			<main>
 				<h1>Create account</h1>
-				<form onSubmit={handleSubmit}>
+				<form
+					onSubmit={(e) => {
+						if (password === passwordConfirm) {
+							setIsPasswordDiff(false);
+							e.preventDefault();
+						} else {
+							setIsPasswordDiff(true);
+							e.preventDefault();
+						}
+					}}>
 					<div>
 						<h2>Name</h2>
 						<input
@@ -66,6 +77,9 @@ const Form = ({
 						/>
 					</div>
 					<input type="submit" value="Register" />
+					{isPasswordDiff && (
+						<h3>Les mots de passe doivent être identiques.</h3>
+					)}
 				</form>
 			</main>
 		</>
