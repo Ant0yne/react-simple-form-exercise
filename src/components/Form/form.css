@@ -1,3 +1,11 @@
 main {
 	padding: 10px;
 }
+
+.hidden {
+	display: none;
+}
+
+.wrong-confirm > input {
+	border: 1px solid red;
+}

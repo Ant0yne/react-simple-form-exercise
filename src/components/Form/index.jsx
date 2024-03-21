@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Result from "../Result";
+
 import "./form.css";
 
 const Form = ({
@@ -13,74 +15,95 @@ const Form = ({
 	setPasswordConfirm,
 }) => {
 	const [isPasswordDiff, setIsPasswordDiff] = useState(false);
+	const [isFieldEmpty, setisFieldEmpty] = useState(false);
+	const [isFormHidden, setIsFormHidden] = useState(false);
+
+	const handleSubmit = (e) => {
+		if (password !== passwordConfirm) {
+			e.preventDefault();
+			setIsPasswordDiff(true);
+			setisFieldEmpty(false);
+		} else if (!name || !email || !password || !passwordConfirm) {
+			e.preventDefault();
+			setisFieldEmpty(true);
+			setIsPasswordDiff(false);
+		} else {
+			e.preventDefault();
+			setIsPasswordDiff(false);
+			setisFieldEmpty(false);
+			setIsFormHidden(true);
+		}
+	};
 
 	return (
 		<>
 			<main>
-				<h1>Create account</h1>
-				<form
-					onSubmit={(e) => {
-						if (password === passwordConfirm) {
-							setIsPasswordDiff(false);
-							e.preventDefault();
-						} else {
-							setIsPasswordDiff(true);
-							e.preventDefault();
-						}
-					}}>
-					<div>
-						<h2>Name</h2>
-						<input
-							type="text"
-							placeholder="Your name..."
-							name="name"
-							value={name}
-							onChange={(e) => {
-								setName(e.target.value);
-							}}
-						/>
-					</div>
-					<div>
-						<h2>Email</h2>
-						<input
-							type="email"
-							placeholder="Your email..."
-							name="email"
-							value={email}
-							onChange={(e) => {
-								setEmail(e.target.value);
-							}}
-						/>
-					</div>
-					<div>
-						<h2>Password</h2>
-						<input
-							type="password"
-							placeholder="Your password..."
-							name="password"
-							value={password}
-							onChange={(e) => {
-								setPassword(e.target.value);
-							}}
-						/>
-					</div>
-					<div>
-						<h2>Confirm your password</h2>
-						<input
-							type="password"
-							placeholder="Confirm your password..."
-							name="passwordConfirm"
-							value={passwordConfirm}
-							onChange={(e) => {
-								setPasswordConfirm(e.target.value);
-							}}
-						/>
-					</div>
-					<input type="submit" value="Register" />
-					{isPasswordDiff && (
-						<h3>Les mots de passe doivent être identiques.</h3>
-					)}
-				</form>
+				<div className={isFormHidden ? "hidden" : ""}>
+					<h1>Create account</h1>
+					<form onSubmit={handleSubmit}>
+						<div>
+							<h2>Name</h2>
+							<input
+								type="text"
+								placeholder="Your name..."
+								name="name"
+								value={name}
+								onChange={(e) => {
+									setName(e.target.value);
+								}}
+							/>
+						</div>
+						<div>
+							<h2>Email</h2>
+							<input
+								type="email"
+								placeholder="Your email..."
+								name="email"
+								value={email}
+								onChange={(e) => {
+									setEmail(e.target.value);
+								}}
+							/>
+						</div>
+						<div className={isPasswordDiff ? "wrong-confirm" : ""}>
+							<h2>Password</h2>
+							<input
+								type="password"
+								placeholder="Your password..."
+								name="password"
+								value={password}
+								onChange={(e) => {
+									setPassword(e.target.value);
+								}}
+							/>
+						</div>
+						<div className={isPasswordDiff ? "wrong-confirm" : ""}>
+							<h2>Confirm your password</h2>
+							<input
+								type="password"
+								placeholder="Confirm your password..."
+								name="passwordConfirm"
+								value={passwordConfirm}
+								onChange={(e) => {
+									setPasswordConfirm(e.target.value);
+								}}
+							/>
+						</div>
+						<input type="submit" value="Register" />
+						{isPasswordDiff && (
+							<h3>Les mots de passe doivent être identiques.</h3>
+						)}
+						{isFieldEmpty && <h3>Tous les champs doivent être remplis.</h3>}
+					</form>
+				</div>
+				<div className={!isFormHidden ? "hidden" : ""}>
+					<Result
+						name={name}
+						email={email}
+						password={password}
+						setIsFormHidden={setIsFormHidden}
+					/>
+				</div>
 			</main>
 		</>
 	);
