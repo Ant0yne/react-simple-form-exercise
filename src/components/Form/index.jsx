@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import Result from "../Result";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./form.css";
 
 const Form = ({
@@ -17,6 +19,8 @@ const Form = ({
 	const [isPasswordDiff, setIsPasswordDiff] = useState(false);
 	const [isFieldEmpty, setisFieldEmpty] = useState(false);
 	const [isFormHidden, setIsFormHidden] = useState(false);
+	const [eyeIcon, setEyeIcon] = useState("eye");
+	const [passwordType, setPasswordType] = useState("password");
 
 	const handleSubmit = (e) => {
 		if (password !== passwordConfirm) {
@@ -32,6 +36,16 @@ const Form = ({
 			setIsPasswordDiff(false);
 			setisFieldEmpty(false);
 			setIsFormHidden(true);
+		}
+	};
+
+	const revealPassword = () => {
+		if (eyeIcon === "eye") {
+			setEyeIcon("eye-slash");
+			setPasswordType("text");
+		} else {
+			setEyeIcon("eye");
+			setPasswordType("password");
 		}
 	};
 
@@ -68,7 +82,7 @@ const Form = ({
 						<div className={isPasswordDiff ? "wrong-confirm" : ""}>
 							<h2>Password</h2>
 							<input
-								type="password"
+								type={passwordType}
 								placeholder="Your password..."
 								name="password"
 								value={password}
@@ -76,11 +90,14 @@ const Form = ({
 									setPassword(e.target.value);
 								}}
 							/>
+							<div>
+								<FontAwesomeIcon icon={eyeIcon} onClick={revealPassword} />
+							</div>
 						</div>
 						<div className={isPasswordDiff ? "wrong-confirm" : ""}>
 							<h2>Confirm your password</h2>
 							<input
-								type="password"
+								type={passwordType}
 								placeholder="Confirm your password..."
 								name="passwordConfirm"
 								value={passwordConfirm}

@@ -3,6 +3,10 @@ import { useState } from "react";
 import Form from "./components/Form";
 import Footer from "./components/Footer";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+library.add(faEyeSlash, faEye);
+
 import "./App.css";
 
 function App() {
