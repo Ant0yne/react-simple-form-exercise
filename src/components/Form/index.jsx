@@ -55,62 +55,69 @@ const Form = ({
 				<div className={isFormHidden ? "hidden" : ""}>
 					<h1>Create account</h1>
 					<form onSubmit={handleSubmit}>
-						<div>
-							<h2>Name</h2>
-							<input
-								type="text"
-								placeholder="Your name..."
-								name="name"
-								value={name}
-								onChange={(e) => {
-									setName(e.target.value);
-								}}
-							/>
-						</div>
-						<div>
-							<h2>Email</h2>
-							<input
-								type="email"
-								placeholder="Your email..."
-								name="email"
-								value={email}
-								onChange={(e) => {
-									setEmail(e.target.value);
-								}}
-							/>
-						</div>
-						<div className={isPasswordDiff ? "wrong-confirm" : ""}>
-							<h2>Password</h2>
-							<input
-								type={passwordType}
-								placeholder="Your password..."
-								name="password"
-								value={password}
-								onChange={(e) => {
-									setPassword(e.target.value);
-								}}
-							/>
-							<div>
-								<FontAwesomeIcon icon={eyeIcon} onClick={revealPassword} />
+						<div className="container">
+							<div className={isFieldEmpty ? "wrong-confirm" : ""}>
+								<label htmlFor="nameInput">
+									<h2>Name</h2>
+								</label>
+								<input
+									type="text"
+									placeholder="Your name..."
+									name="name"
+									id="nameInput"
+									value={name}
+									onChange={(e) => {
+										setName(e.target.value);
+									}}
+								/>
 							</div>
+							<div className={isFieldEmpty ? "wrong-confirm" : ""}>
+								<h2>Email</h2>
+								<input
+									type="email"
+									placeholder="Your email..."
+									name="email"
+									value={email}
+									onChange={(e) => {
+										setEmail(e.target.value);
+									}}
+								/>
+							</div>
+							<div
+								id="password"
+								className={isPasswordDiff ? "wrong-confirm" : ""}>
+								<h2>Password</h2>
+								<input
+									type={passwordType}
+									placeholder="Your password..."
+									name="password"
+									value={password}
+									onChange={(e) => {
+										setPassword(e.target.value);
+									}}
+								/>
+								<div>
+									<FontAwesomeIcon icon={eyeIcon} onClick={revealPassword} />
+								</div>
+							</div>
+							<div className={isPasswordDiff ? "wrong-confirm" : ""}>
+								<h2>Confirm your password</h2>
+								<input
+									type={passwordType}
+									placeholder="Confirm your password..."
+									name="passwordConfirm"
+									value={passwordConfirm}
+									onChange={(e) => {
+										setPasswordConfirm(e.target.value);
+									}}
+								/>
+							</div>
+							<input type="submit" value="Register" />
+							{isPasswordDiff && (
+								<h3>Les mots de passe doivent être identiques.</h3>
+							)}
+							{isFieldEmpty && <h3>Tous les champs doivent être remplis.</h3>}
 						</div>
-						<div className={isPasswordDiff ? "wrong-confirm" : ""}>
-							<h2>Confirm your password</h2>
-							<input
-								type={passwordType}
-								placeholder="Confirm your password..."
-								name="passwordConfirm"
-								value={passwordConfirm}
-								onChange={(e) => {
-									setPasswordConfirm(e.target.value);
-								}}
-							/>
-						</div>
-						<input type="submit" value="Register" />
-						{isPasswordDiff && (
-							<h3>Les mots de passe doivent être identiques.</h3>
-						)}
-						{isFieldEmpty && <h3>Tous les champs doivent être remplis.</h3>}
 					</form>
 				</div>
 				<div className={!isFormHidden ? "hidden" : ""}>

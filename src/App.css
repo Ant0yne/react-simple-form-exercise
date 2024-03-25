@@ -3,6 +3,7 @@
 :root {
 	--light-grey: #d3d3d3;
 	--white: #fff;
+	--white-grey: #ecebeb;
 	--black: #000;
 	--purple: #5c48d3;
 	--red: #dd0c0c;
@@ -20,13 +21,14 @@ html {
 body {
 	font-size: 1.6rem;
 	line-height: 22px;
+	padding: 5px;
 }
 
 h1 {
 	font-size: 3rem;
 	text-align: center;
 	font-weight: bold;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 h3 {

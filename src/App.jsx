@@ -17,6 +17,7 @@ function App() {
 
 	return (
 		<>
+			{/* gérer l'apparition de Form et Result avec une ternaire */}
 			<Form
 				name={name}
 				setName={setName}

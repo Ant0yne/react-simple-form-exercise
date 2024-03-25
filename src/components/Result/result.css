@@ -1,0 +1,25 @@
+#result {
+	width: 250px;
+}
+
+#result > div {
+	background-color: var(--white-grey);
+	border-radius: 5px;
+	margin-bottom: 30px;
+}
+
+#result p {
+	text-align: center;
+	margin: 10px 0;
+}
+
+#result button {
+	border-radius: 5px;
+	font-size: 2rem;
+	background-color: var(--purple);
+	color: var(--white);
+	width: 220px;
+	padding: 5px 0;
+	border: none;
+	margin: 0 auto;
+}
